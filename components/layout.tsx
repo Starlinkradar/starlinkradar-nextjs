@@ -3,9 +3,13 @@ import Image from 'next/image'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
+import { AppBar, fade, Tab, Tabs } from '@material-ui/core'
+import React from 'react'
+import Home from '../pages'
+import Livemap from '../pages/livemap'
+//import { TabContext, TabList, TabPanel } from '@material-ui/lab'
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'Starlinkradar'
 
 export default function Layout({
   children,
@@ -14,59 +18,73 @@ export default function Layout({
   children: React.ReactNode
   home?: boolean
 }) {
+
+  function a11yProps(index: any) {
+    return {
+      id: `scrollable-auto-tab-${index}`,
+      'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    };
+  }
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const pages = {
+    0: children,
+    1: <Livemap/>
+  }
+
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:site_name" content="Starlinkradar"/>
+        <title>Starlinkradar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="Track every Starlink satellites in realtime."
         />
         <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+          name="keywords"
+          content="space, satellites, starlink, starlinkradar, starlinktracker, spacex, findstarlink, satellitetracker, starlinkfinder, starlinksatellites, trackstarlink"
         />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="author" content="Larko" />
+        <meta name="theme-color" content="#bdf9ff" />
+        <meta content="https://i.imgur.com/siKmS8a.png" property="og:image" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Starlinkradar" />
+        <meta
+          name="twitter:description"
+          content="Track every Starlink satellites in realtime."
+        />
+        <meta name="twitter:image" content="https://i.imgur.com/siKmS8a.png" />
+        <meta content="https://i.imgur.com/siKmS8a.png" property="og:image" />
       </Head>
       <header className={styles.header}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
+      <AppBar position="static" style={{backgroundColor: fade('#363636', 0.1), borderRadius: 20, width:"auto", maxWidth: 800}}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+          style={{borderRadius: 20}}
+        >
+          <Tab label="Home" {...a11yProps(0)} value={0}/>
+          <Tab label="Livemap"  {...a11yProps(1)} value={1}/>
+          <Tab label="Starlinks" {...a11yProps(2)} value={2}/>
+          <Tab label="Contact"  {...a11yProps(3)} value={3}/>
+        </Tabs>
+      </AppBar>
       </header>
-      <main>{children}</main>
+      <br/>
+      <main>{pages[value]}</main>
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">

@@ -1,0 +1,44 @@
+  
+import fs from 'fs'
+import { join } from 'path'
+import matter from 'gray-matter'
+
+const postsDirectory = join(process.cwd(), '_updates')
+
+export function getUpdateSlugs() {
+  return fs.readdirSync(postsDirectory)
+}
+
+export function getUpdateBySlug(slug, fields = []) {
+  const realSlug = slug.replace(/\.md$/, '')
+  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data, content } = matter(fileContents)
+
+  const items = {}
+
+  // Ensure only the minimal needed data is exposed
+  fields.forEach((field) => {
+    if (field === 'slug') {
+      items[field] = realSlug
+    }
+    if (field === 'content') {
+      items[field] = content
+    }
+
+    if (data[field]) {
+      items[field] = data[field]
+    }
+  })
+
+  return items
+}
+
+export function getAllUpdates(fields = []) {
+  const slugs = getUpdateSlugs()
+  const posts = slugs
+    .map((slug) => getUpdateBySlug(slug, fields))
+    // sort posts by date in descending order
+    .sort((post1:any, post2:any) => (post1.date > post2.date ? -1 : 1))
+  return posts
+}

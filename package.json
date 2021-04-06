@@ -8,15 +8,31 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "*",
+    "@mpth/react-no-ssr": "^1.0.1",
+    "axios": "^0.21.1",
     "date-fns": "^2.11.1",
+    "geojson": "^0.5.0",
+    "google-map-react": "^2.1.9",
     "gray-matter": "^4.0.2",
+    "marked": "^2.0.1",
     "next": "^10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "remark": "^12.0.0",
-    "remark-html": "^12.0.0"
+    "react-globe.gl": "^2.18.0",
+    "remark": "^12.0.1",
+    "remark-html": "^12.0.0",
+    "require-context": "^1.1.0",
+    "simplebar-react": "^2.3.0",
+    "three": "^0.127.0",
+    "tle-modified": "github:Larko00/tle-modified",
+    "tle.js": "^4.2.9"
   },
   "devDependencies": {
+    "@types/google-map-react": "^2.1.0",
+    "@types/marked": "^2.0.1",
     "@types/node": "^13.11.0",
     "@types/react": "^16.9.32",
     "typescript": "^3.8.3"
