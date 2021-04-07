@@ -34,3 +34,12 @@ img {
   min-width: 100%;
   min-height: 100%;
 }
+
+#logoMain {
+  /*user-drag: none;*/ 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

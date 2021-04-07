@@ -18,7 +18,7 @@ export default function Home(props) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <img src="images/logo.png"/>
+      <img src="images/logo.png" className="logoMain" draggable={false} />
       <br/>
       <LatestUpdates allPosts={props.allPosts}/>
       <video autoPlay muted loop id="backgroundVideo">

@@ -53,7 +53,7 @@ export default function Layout({
           content="space, satellites, starlink, starlinkradar, starlinktracker, spacex, findstarlink, satellitetracker, starlinkfinder, starlinksatellites, trackstarlink"
         />
         <meta name="author" content="Larko" />
-        <meta name="theme-color" content="#bdf9ff" />
+        <meta name="theme-color" content="#000000" />
         <meta content="https://i.imgur.com/siKmS8a.png" property="og:image" />
 
         <meta name="twitter:card" content="summary" />
